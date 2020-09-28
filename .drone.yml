@@ -34,7 +34,7 @@ steps:
   image: alpine
   commands:
     - echo "Deployment placeholder"
-    - echo "Deploy ${DRONE_TAG} to production."
+    - echo "Deploy ${DRONE_TAG} to ${DRONE_DEPLOY_TO}."
   when:
     ref:
       include:
