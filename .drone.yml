@@ -19,16 +19,22 @@ steps:
   commands:
     - "docker build -t backend:${DRONE_BUILD_NUMBER} ."
   when:
-    branch:
-      - master
+    ref:
+      include:
+        - refs/tags/*
+    event:
+      - promote
+    target:
+      - production
 
 - name: deploy
   image: alpine
   commands:
     - echo "Deployment placeholder"
   when:
-    branch:
-      - master
+    ref:
+      include:
+        - refs/tags/*
     event:
       - promote
     target:
