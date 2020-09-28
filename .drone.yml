@@ -10,6 +10,7 @@ steps:
   - whoami
 
 - name: build
+  privledged: true
   image: docker:dind
   volumes:
   - name: dockersock
