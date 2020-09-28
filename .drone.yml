@@ -8,3 +8,8 @@ steps:
   commands:
   - cat test.txt
   - whoami
+
+- name: build
+  image: docker
+  commands:
+    - docker build -t test:${DRONE_BUILD_NUMBER} .
