@@ -23,52 +23,8 @@ steps:
       include:
         - refs/tags/*
     event:
-      - promote
-    target:
-      - production
-
-- name: deploy
-  image: alpine
-  commands:
-    - echo "Deployment placeholder"
-  when:
-    ref:
-      include:
-        - refs/tags/*
-    event:
-      - promote
-    target:
-      - production
-
-volumes:
-  - name: dockersock
-    host:
-      path: /var/run/docker.sock
-
----
-kind: pipeline
-type: docker
-name: frontend
-   
-steps:
-- name: test
-  image: alpine
-  commands:
-  - cat test.txt
-  - whoami
-
-- name: build
-  privledged: true
-  image: docker:dind
-  volumes:
-  - name: dockersock
-    path: /var/run/docker.sock
-  commands:
-    - "docker build -t frontend:${DRONE_BUILD_NUMBER} ."
-  when:
-    ref:
-      include:
-        - refs/tags/*
+      exclude:
+        - promote
 
 - name: deploy
   image: alpine
