@@ -21,7 +21,7 @@ steps:
   - name: dockersock
     path: /var/run/docker.sock
   commands:
-    - "docker build -t backend:${DRONE_BUILD_NUMBER} ."
+    - "docker build -t backend:${DRONE_TAG} ."
   when:
     ref:
       include:
@@ -41,8 +41,6 @@ steps:
         - refs/tags/*
     event:
       - promote
-    target:
-      - production
 
 volumes:
   - name: dockersock
