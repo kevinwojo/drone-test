@@ -10,6 +10,14 @@ steps:
   - whoami
 
 - name: build
-  image: docker
+  image: docker:dind
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
   commands:
-    - docker build -t test:${DRONE_BUILD_NUMBER} .
+    - "docker build -t test:${DRONE_BUILD_NUMBER} ."
+
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
