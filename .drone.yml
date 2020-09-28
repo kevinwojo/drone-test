@@ -6,5 +6,34 @@ steps:
 - name: test
   image: alpine
   commands:
-  - echo hello
-  - echo world
+  - cat test.txt
+  - whoami
+
+- name: build
+  privledged: true
+  image: docker:dind
+  volumes:
+  - name: dockersock
+    path: /var/run/docker.sock
+  commands:
+    - "docker build -t test:${DRONE_BUILD_NUMBER} ."
+  when:
+    branch:
+      - master
+
+- name: deploy
+  image: alpine
+  commands:
+    - echo "Deployment placeholder"
+  when:
+    branch:
+      - master
+    event:
+      - promote
+    target:
+      - production
+
+volumes:
+  - name: dockersock
+    host:
+      path: /var/run/docker.sock
