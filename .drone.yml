@@ -6,4 +6,4 @@ steps:
 - name: test
   image: alpine
   commands:
-  - echo test.txt
+  - cat test.txt
