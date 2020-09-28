@@ -18,6 +18,16 @@ steps:
   commands:
     - "docker build -t test:${DRONE_BUILD_NUMBER} ."
 
+- name: deploy
+  image: alpine
+  commands:
+    - echo "Deployment placeholder"
+  when:
+    event:
+      - promote
+    target:
+      - production
+
 volumes:
   - name: dockersock
     host:
